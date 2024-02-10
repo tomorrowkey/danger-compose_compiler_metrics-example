@@ -32,6 +32,24 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+
+        val metricsPath = "${project.buildDir.absolutePath}/compose_compiler_metrics"
+        if (project.findProperty("composeCompilerMetrics") == "true") {
+            freeCompilerArgs =
+                listOf(
+                    *freeCompilerArgs.toTypedArray(),
+                    "-P",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$metricsPath",
+                )
+        }
+        if (project.findProperty("composeCompilerReports") == "true") {
+            freeCompilerArgs =
+                listOf(
+                    *freeCompilerArgs.toTypedArray(),
+                    "-P",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$metricsPath",
+                )
+        }
     }
     buildFeatures {
         compose = true
