@@ -57,4 +57,4 @@ fun ContactDetails(contact: Contact) {
     Text(text = "Name ${contact.name}, Number: ${contact.number}")
 }
 
-data class Contact(var name: String, val number: String)
+data class Contact(val name: String, val number: String)
